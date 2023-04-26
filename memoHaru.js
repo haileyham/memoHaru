@@ -2,14 +2,24 @@ let allMemo = JSON.parse(localStorage.getItem("allMemo"));
 allMemo = allMemo ?? [];
 render();
 
-//
-function saveNote() {
+//메모하기
+//입력값 '' 방지 추가
+function saveNote(e) {
   const title = document.getElementById("title").value;
   const content = document.getElementById("content").value;
+
+  if(title == ''){
+    alert('오늘의 제목은 무엇인가요? 제목을 입력해 주세요')
+    e.preventDefault();
+  }if(content == ''){
+    alert('당신의 하루가 궁금해요')
+    e.preventDefault();
+  }
 
   allMemo.push({ title, content, len: allMemo.length });
   localStorage.setItem("allMemo", JSON.stringify(allMemo));
   render();
+
 }
 
 //render
@@ -93,3 +103,6 @@ document.querySelector('#badge').addEventListener('click', function () {
     document.querySelector('.memoBtn').classList.remove('memoBtnDark');
   }
 })
+
+
+//입력방지
